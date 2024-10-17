@@ -5,7 +5,7 @@ project(dbframe)
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/")
 
 set(CMAKE_CXX_STANDARD 17)
-
+set(CMAKE_BUILD_TYPE "Debug")
 add_subdirectory(fmt)
 
 add_subdirectory(dbimpl)

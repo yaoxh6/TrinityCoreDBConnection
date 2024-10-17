@@ -10,8 +10,10 @@ compile_commands.json
 CTestTestfile.cmake
 _deps
 CMakeUserPresets.json
-.vscode
 example/sync/sync
 dbimpl/libdbimpl.a
 example/async/async
 dbimpl/libdbimpl.a
+build
+dbimpl/libdbimpl.a
+fmt/libfmt.a
