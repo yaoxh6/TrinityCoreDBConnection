@@ -11,3 +11,5 @@ add_subdirectory(fmt)
 add_subdirectory(dbimpl)
 
 add_subdirectory(example/sync)
+
+add_subdirectory(example/async)

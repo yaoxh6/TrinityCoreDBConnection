@@ -28,6 +28,7 @@ enum TestDatabaseStatements : uint32
         name for a suiting suffix.
     */
     SAKILA_SEL_ACTOR_INFO,
+    SAKILA_SEL_ACTOR_INFO_ASYNC,
     MAX_TESTDATABASE_STATEMENTS
 };
 

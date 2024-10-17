@@ -23,6 +23,7 @@ void TestDatabaseConnection::DoPrepareStatements()
     if (!m_reconnecting)
         m_stmts.resize(MAX_TESTDATABASE_STATEMENTS);
     PrepareStatement(SAKILA_SEL_ACTOR_INFO, "select id,name,phone from employee where id=?", CONNECTION_SYNCH);
+    PrepareStatement(SAKILA_SEL_ACTOR_INFO_ASYNC, "select id,name,phone from employee where id=?", CONNECTION_ASYNC);
 }
 
 TestDatabaseConnection::TestDatabaseConnection(MySQLConnectionInfo& connInfo) : MySQLConnection(connInfo)
