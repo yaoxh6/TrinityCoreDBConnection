@@ -13,7 +13,26 @@ void onGetRes(PreparedQueryResult result)
 {
     if (result)
     {
-        TC_LOG_INFO("", "actor_id=%u,first_name=%s,last_name=%d", (*result)[0].GetUInt8(),(*result)[1].GetString(),(*result)[2].GetUInt32());
+        TC_LOG_INFO("", "onGetRes, actor_id=%u,first_name=%s,last_name=%d", (*result)[0].GetUInt8(),(*result)[1].GetString(),(*result)[2].GetUInt32());
+    }
+    return;
+}
+
+void onGetChainRes1(PreparedQueryResult result)
+{
+    if (result)
+    {
+        TC_LOG_INFO("", "onGetChainRes1, actor_id=%u,first_name=%s,last_name=%d", (*result)[0].GetUInt8(),(*result)[1].GetString(),(*result)[2].GetUInt32());
+    }
+    return;
+}
+
+
+void onGetChainRes2(PreparedQueryResult result)
+{
+    if (result)
+    {
+        TC_LOG_INFO("", "onGetChainRes2, actor_id=%u,first_name=%s,last_name=%d", (*result)[0].GetUInt8(),(*result)[1].GetString(),(*result)[2].GetUInt32());
     }
     isStop = true;
     return;
@@ -41,6 +60,20 @@ int main()
         _queryProcessor.AddCallback(TestDatabase.AsyncQuery(stmt).WithPreparedCallback([](PreparedQueryResult result)
         {
             onGetRes(std::move(result));
+        }));
+    }
+    {
+        auto stmt = TestDatabase.GetPreparedStatement(SAKILA_SEL_ACTOR_INFO_ASYNC);
+        stmt->setUInt8(0, 1);
+        _queryProcessor.AddCallback(TestDatabase.AsyncQuery(stmt)
+        .WithChainingPreparedCallback([stmt](QueryCallback& queryCallback, PreparedQueryResult result)
+        {
+            onGetChainRes1(std::move(result));
+            auto stmt = TestDatabase.GetPreparedStatement(SAKILA_SEL_ACTOR_INFO_ASYNC);
+            stmt->setUInt8(0, 1);
+            queryCallback.SetNextQuery(TestDatabase.AsyncQuery(stmt));
+        }).WithPreparedCallback([](PreparedQueryResult result){
+            onGetChainRes2(std::move(result));
         }));
     }
     WorldUpdateLoop();

@@ -18,10 +18,9 @@
             "type": "shell",
             "command": "make",
             "args": [
-                "../../",
             ],
             "options": {
-                "cwd": "${fileDirname}"
+                "cwd": "${workspaceFolder}"
             }, 
         },
         {
