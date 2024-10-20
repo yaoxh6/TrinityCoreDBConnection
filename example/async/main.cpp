@@ -15,6 +15,7 @@ void onGetRes(PreparedQueryResult result)
     {
         TC_LOG_INFO("", "onGetRes, actor_id=%u,first_name=%s,last_name=%d", (*result)[0].GetUInt8(),(*result)[1].GetString(),(*result)[2].GetUInt32());
     }
+    isStop = true;
     return;
 }
 
